@@ -1,6 +1,7 @@
 package com.example.library.service.imple;
 
 import com.example.library.dto.CustomerDto;
+import com.example.library.model.Address;
 import com.example.library.model.Customer;
 import com.example.library.repository.CustomerRepository;
 import com.example.library.repository.RoleRepository;
@@ -59,6 +60,11 @@ public class CustomerserviceImple implements CustomerService {
     @Override
     public List<Customer> findAll() {
         return customerRepository.findAll();
+    }
+
+    @Override
+    public Customer saveInfo(Customer customer, Address address) {
+        return null;
     }
 
     public Customer findById(long id) {
