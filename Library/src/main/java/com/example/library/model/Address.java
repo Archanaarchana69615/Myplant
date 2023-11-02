@@ -30,7 +30,7 @@ public class Address  {
     private String country;
     private boolean is_default;
 
-     @OneToMany(mappedBy = "shipping address")
+     @OneToMany(mappedBy = "shippingAddress")
     private List<Order> order;
 
      @ManyToOne(fetch = FetchType.EAGER,cascade = {CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH,CascadeType.DETACH})

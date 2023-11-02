@@ -1,6 +1,7 @@
 package com.example.customer.controller;
 
 import com.example.library.dto.AddressDto;
+import com.example.library.dto.CustomerDto;
 import com.example.library.model.Address;
 import com.example.library.model.Category;
 import com.example.library.model.Customer;
@@ -140,8 +141,9 @@ public class AddressController {
   @PostMapping("/add-address-checkout")
     public String AddAddress(@ModelAttribute("AddressDto") AddressDto addressDto,Model model,Principal principal,HttpServletRequest request)
   {
-      model.addAttribute("address",addressDto);
+
       addressService.save(addressDto,principal.getName());
+      model.addAttribute("address",addressDto);
 
       model.addAttribute("success","added successfully");
 
@@ -160,20 +162,36 @@ public class AddressController {
                   return "redirect:/account";
 
   }
-  @GetMapping("/about")
-    public String aboutUs(Model model)
-  {
-    List<Category>categories =categoryservice.findAllActivatedTrue();
-    model.addAttribute("categories",categories);
-    return "about";
-  }
+//  @GetMapping("/about")
+//    public String aboutUs(Model model)
+//  {
+//    List<Category>categories =categoryservice.findAllActivatedTrue();
+//    model.addAttribute("categories",categories);
+//    return "about";
+//  }
+//
+//  @GetMapping("/contact")
+//    public String contactUs(Model model)
+//  {
+//      List<Category>categories=categoryservice.findAllActivatedTrue();
+//      model.addAttribute("categories",categories);
+//      return "contact";
+//  }
 
-  @GetMapping("/contact")
-    public String contactUs(Model model)
+  @GetMapping("/add-profile")
+    public String addProfile(Model model,Principal principal)
   {
-      List<Category>categories=categoryservice.findAllActivatedTrue();
-      model.addAttribute("categories",categories);
-      return "contact";
+      if(principal==null)
+      {
+          return "redirect:/login";
+      }
+      String username =principal.getName();
+      Customer customer = customerService.findByEmail(username);
+      CustomerDto customerDto =new CustomerDto();
+      model.addAttribute("customerDto",customerDto);
+
+
+      return "/profile";
   }
 
 

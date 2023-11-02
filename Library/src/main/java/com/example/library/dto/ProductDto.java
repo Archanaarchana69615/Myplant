@@ -21,7 +21,11 @@ public class ProductDto {
 
    private String description;
 
-   private double price;
+   private double costPrice;
+
+   private double salesPrice;
+
+   private int currentQuantity;
 
    private List<Image> image;
 

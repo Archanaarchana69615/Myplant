@@ -25,7 +25,7 @@ public class OrderDetails  {
 
 
     @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    @JoinColumn(name = "order_id",referencedColumnName = "order_id")
+    @JoinColumn(name = "product_id",referencedColumnName = "product_id")
      private Product product;
 
 

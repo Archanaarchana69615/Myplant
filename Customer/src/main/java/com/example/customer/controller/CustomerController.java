@@ -20,7 +20,7 @@ public class CustomerController {
     private CustomerService customerService;
 
 
-    @GetMapping( "/index")
+    @RequestMapping(value = "/index" , method = RequestMethod.GET)
     public String getDashboard(@RequestParam(required=false)String tab,Model model, Principal principal,HttpSession session)
     {
         if(principal==null)
@@ -72,7 +72,7 @@ public class CustomerController {
     {
         return "Index";
     }
-    @GetMapping("contact")
+    @GetMapping("/contact")
     public String contactUs()
     {
         return "Index";

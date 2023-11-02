@@ -61,7 +61,7 @@ public class ProductController {
         return "product-full-list";
     }
 
-    @GetMapping("/product-full/{id}")
+    @GetMapping("/product-list/{id}")
     public String getProductFull(@PathVariable("id")long id, Model model){
         List<Category> categories = categoryservice.findAllActivatedTrue();
         ProductDto productDto=productservice.findById(id);

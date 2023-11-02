@@ -12,7 +12,7 @@
     <title>Products</title>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="assets/imgs/theme/favicon.svg">
+    <link rel="shortcut icon" type="image/x-icon" th:href="@{assets/imgs/theme/favicon.svg>
     <!-- Template CSS -->
     <link rel="stylesheet" href="assets/css/main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/css/dataTables.bootstrap4.min.css" integrity="sha512-PT0RvABaDhDQugEbpNMwgYBCnGCiTZMh9yOzUsJHDgl/dMhD9yjHAwoumnUk3JydV3QTcIkNDuN40CJxik5+WQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -39,7 +39,7 @@
                 <th scope="col">Name</th>
                 <th scope="col">Category</th>
                 <th scope="col">Price</th>
-                <th scope="col">Quantity</th>
+<!--                <th scope="col">Quantity</th>-->
                 <th scope="col">Image</th>
                 <th scope="col">Update</th>
 <!--                <th scope="col">Action</th>-->
@@ -49,7 +49,7 @@
             <tr th:each = " product : ${products}">
                 <th scope="row" th:text = "${product.name}"></th>
                 <td th:text = "${product.category.name}"></td>
-                <td th:text = "${product.price}"></td>
+                <td th:text = "${product.salesPrice}"></td>
 
 <!--                <td th:text = "${product.currentQuantity}"></td>-->
                 <td>
@@ -72,7 +72,6 @@
     </div>
 
 </main>
-
 
 
 <script src="/admin/js/vendors/jquery-3.6.0.min.js"></script>

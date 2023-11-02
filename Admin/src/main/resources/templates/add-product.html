@@ -62,8 +62,8 @@
                             <option th:value = "null">-SELECT-</option>
                             <option th:each = "category : ${categories}"
                                     th:value = "${category.id}"
-                                    th:text = "${category.name}"
-                                    th:text = "${category.description}">
+                                    th:text = "${category.name}">
+<!--                                    th:text = "${category.description}">-->
                             </option>
                         </select>
                     </div>
@@ -122,7 +122,7 @@
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="price">PRICE</label>
                     <div class="col-md-4">
-                        <input id="price" name="price" th:field = "*{price}" class="form-control input-md" type="text" required>
+                        <input id="price" name="price" th:field = "*{salesPrice}" class="form-control input-md" type="text" required>
                         <div class="error text-danger ms-2"></div>
                     </div>
 

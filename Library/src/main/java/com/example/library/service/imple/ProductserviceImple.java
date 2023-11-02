@@ -51,9 +51,10 @@ public class ProductserviceImple implements Productservice {
         productDto.setId(product.getId());
         productDto.setDescription(product.getDescription());
         productDto.setName(product.getName());
-        productDto.setPrice(product.getPrice());
+        productDto.setSalesPrice(product.getSalePrice());
+        productDto.setCostPrice(product.getCostPrice());
         productDto.setCategory(product.getCategory());
-        productDto.setImage(product.getImage());
+        productDto.setImage(product.getImages());
         return productDto;
     }
 
@@ -71,7 +72,8 @@ public class ProductserviceImple implements Productservice {
             productUpdate.setCategory(productDto.getCategory());
             productUpdate.setName(productDto.getName());
             productUpdate.setDescription(productDto.getDescription());
-            productUpdate.setPrice(productDto.getPrice());
+            productUpdate.setSalePrice(productDto.getSalesPrice());
+            productUpdate.setCostPrice(productDto.getCostPrice());
             productRepository.save(productUpdate);
             if (imageProducts != null && !imageProducts.isEmpty() && imageProducts.size() != 1) {
                 List<Image> imagesList = new ArrayList<>();
@@ -85,7 +87,7 @@ public class ProductserviceImple implements Productservice {
                     imagesList.add(image.get(i));
                     i++;
                 }
-                productUpdate.setImage(imagesList);
+                productUpdate.setImages(imagesList);
             }
 
 //            return productUpdate;
@@ -105,13 +107,14 @@ public class ProductserviceImple implements Productservice {
 //
             product.setName(productDto.getName());
             product.setDescription(productDto.getDescription());
-            product.setPrice(productDto.getPrice());
+            product.setSalePrice(productDto.getSalesPrice());
+//            product.setCostPrice(productDto.getCostPrice());
             product.setCategory(productDto.getCategory());
             product.set_activated(true);
             Product savedProduct = productRepository.save(product);
 
             if (imageProducts == null) {
-                product.setImage(null);
+                product.setImages(null);
             } else {
                 List<Image> imagesList = new ArrayList<>();
                 for (MultipartFile imageProduct : imageProducts) {
@@ -123,7 +126,7 @@ public class ProductserviceImple implements Productservice {
                     imageRepository.save(image);
                     imagesList.add(image);
                 }
-                product.setImage(imagesList);
+                product.setImages(imagesList);
             }
             return savedProduct;
         } catch (Exception e) {
@@ -185,9 +188,10 @@ public class ProductserviceImple implements Productservice {
             ProductDto productDto = new ProductDto();
             productDto.setId(product.getId());
             productDto.setName(product.getName());
-            productDto.setPrice(product.getPrice());
+            productDto.setSalesPrice(product.getSalePrice());
+            productDto.setCostPrice(product.getCostPrice());
             productDto.setDescription(product.getDescription());
-            productDto.setImage(product.getImage());
+            productDto.setImage(product.getImages());
             productDto.setCategory(product.getCategory());
             productDto.setActivated(product.is_activated());
             productDtos.add(productDto);
