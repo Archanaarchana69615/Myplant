@@ -30,6 +30,10 @@ public class Address  {
     private String country;
     private boolean is_default;
 
+    private boolean is_activated;
+
+    private boolean is_deleted;
+
      @OneToMany(mappedBy = "shippingAddress")
     private List<Order> order;
 

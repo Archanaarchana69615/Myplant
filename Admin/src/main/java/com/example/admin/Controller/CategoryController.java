@@ -45,10 +45,10 @@ public class CategoryController {
     public String save(@Valid @ModelAttribute("categoryNew") CategoryDto categoryDto, Model model, RedirectAttributes redirectAttributes) {
         try {
             categoryservice.save(categoryDto);
-            redirectAttributes.addFlashAttribute("error", " duplicate name of category");
+            redirectAttributes.addFlashAttribute("success", " added successfully");
         } catch (DataIntegrityViolationException e1) {
             e1.printStackTrace();
-            redirectAttributes.addFlashAttribute("success", "added sucessfully ");
+            redirectAttributes.addFlashAttribute("error", "duplicate name of category ");
         } catch (Exception e2) {
             e2.printStackTrace();
             redirectAttributes.addFlashAttribute("error", "server error");

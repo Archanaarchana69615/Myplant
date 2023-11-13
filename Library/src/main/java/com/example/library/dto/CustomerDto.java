@@ -39,6 +39,9 @@ public class CustomerDto {
 
     private boolean is_activated;
 
+//    @Column
+//    private long otp;
+
 //   private boolean deleted;
 
 }

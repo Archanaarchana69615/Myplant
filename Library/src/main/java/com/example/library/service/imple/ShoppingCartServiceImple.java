@@ -125,7 +125,7 @@ public ShoppingCart addItemToCart(ProductDto productDto, int quantity, String us
     double unitPrice = (productDto.getSalesPrice() == 0) ? productDto.getCostPrice() : productDto.getSalesPrice();
 
     if (cartItem != null) {
-        // Product is already in the cart; update the quantity
+        // Product is there; update the quantity
         int newQuantity = cartItem.getQuantity() + quantity;
         cartItem.setQuantity(newQuantity);
     } else {
@@ -215,6 +215,11 @@ public ShoppingCart addItemToCart(ProductDto productDto, int quantity, String us
         }
         return shoppingCartRepository.save(shoppingCart);
 
+    }
+
+    @Override
+    public ShoppingCart deleteCartById(Long id) {
+        return null;
     }
 
     private CartItem find(Set<CartItem>cartItems,long productId, String size){

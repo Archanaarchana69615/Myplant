@@ -7,6 +7,7 @@ import lombok.*;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -19,30 +20,30 @@ public class Customer implements Serializable {
     @Column(name="customer_id")
     private Long id;
 
-    private static final long OTP_VALID_DURATION = 5 * 60 * 1000;   // 5 minutes
+//    private static final long OTP_VALID_DURATION = 5 * 60 * 1000;   // 5 minutes
+//
+//    @Column(name = "one_time_password")
+//    private String oneTimePassword;
+//
+//    @Column(name = "otp_requested_time")
+//    private Date otpRequestedTime;
 
-    @Column(name = "one_time_password")
-    private String oneTimePassword;
 
-    @Column(name = "otp_requested_time")
-    private Date otpRequestedTime;
-
-
-    public boolean isOTPRequired() {
-        if (this.getOneTimePassword() == null) {
-            return false;
-        }
-
-        long currentTimeInMillis = System.currentTimeMillis();
-        long otpRequestedTimeInMillis = this.otpRequestedTime.getTime();
-
-        if (otpRequestedTimeInMillis + OTP_VALID_DURATION < currentTimeInMillis) {
-            // OTP expires
-            return false;
-        }
-
-        return true;
-    }
+//    public boolean isOTPRequired() {
+//        if (this.getOneTimePassword() == null) {
+//            return false;
+//        }
+//
+//        long currentTimeInMillis = System.currentTimeMillis();
+//        long otpRequestedTimeInMillis = this.otpRequestedTime.getTime();
+//
+//        if (otpRequestedTimeInMillis + OTP_VALID_DURATION < currentTimeInMillis) {
+//            // OTP expires
+//            return false;
+//        }
+//
+//        return true;
+//    }
 
 
     private String firstname;
@@ -51,11 +52,15 @@ public class Customer implements Serializable {
 
     private String username;
 
+//    private long otp;
+
 //   private String email;
 
     private String password;
+    @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL)
+    private List<Address> addresses;
 
-    private String address;
+//    private String address;
 
     private String mobilenumber;
 
@@ -70,5 +75,11 @@ public class Customer implements Serializable {
 
     @OneToOne(mappedBy = "customer",cascade = CascadeType.ALL)
   private ShoppingCart cart;
+
+    @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL)
+    private List<Order>Orders;
+
+//    @Column(name="reset_password_tocken")
+//    private String resetPasswordTocken;
 
 }

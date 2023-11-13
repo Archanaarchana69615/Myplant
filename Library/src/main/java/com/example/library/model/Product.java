@@ -37,6 +37,11 @@ public class Product {
     private boolean is_activated;
     private boolean is_deleted;
 
+
+    @ElementCollection
+    @CollectionTable(name = "product_image_urls", joinColumns = @JoinColumn(name = "product_id"))
+    private List<String>imageUrls;
+
 //
 //    @OneToMany(fetch=FetchType.EAGER,cascade = {CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH,CascadeType.DETACH})
 //    @JoinTable(name="product_sizes",joinColumns = @JoinColumn(name="product_id",referencedColumnName="product_id"),

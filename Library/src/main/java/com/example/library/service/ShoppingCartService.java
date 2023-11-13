@@ -14,5 +14,8 @@ public interface ShoppingCartService {
 
     ShoppingCart removeItemFromCart(ProductDto productDto, String username);
 
+
+    ShoppingCart deleteCartById(Long id);
+
 //    ShoppingCart find(ProductDto productDto,String username);
 }

@@ -56,12 +56,14 @@ public class AddressController {
         String username = principal.getName();
         Customer customer= customerService.findByEmail(username);
 
-        List<Order>Orders= orderRepository.findByCustomer(customer);
-        Collections.sort(Orders, Collections.reverseOrder(Comparator.comparing(Order::getId)));
-        model.addAttribute("orders",Orders);
+        List<Order>orders = orderRepository.findByCustomer(customer);
+        Collections.sort(orders, Collections.reverseOrder(Comparator.comparing(Order::getId)));
+        model.addAttribute("orders",orders);
 
         model.addAttribute("customer",customer);
-        model.addAttribute("address",customer.getAddress());
+        List<Address> addressList=addressService.findTrueById(customer.getId());
+        model.addAttribute("addresses",addressList);
+//        model.addAttribute("addresses",customer.getAddresses());
 
         HttpSession httpSession1 = httpServletRequest.getSession();
         String name=null;
@@ -97,6 +99,7 @@ public class AddressController {
         Address newaddress = new Address();
          newaddress =addressService.save(addressDto,username);
          model.addAttribute("newaddress",newaddress);
+
          redirectAttributes.addFlashAttribute("message","address added");
          return "redirect:/account";
     }
@@ -113,6 +116,21 @@ public class AddressController {
       AddressDto addressDto= addressService.findById(id);
       model.addAttribute("addressDto",addressDto);
       return "edit-address";
+  }
+  @GetMapping("/delete-address/{id}")
+  public String deleteAddress(@PathVariable("id")Long id,Principal principal,HttpServletRequest request,Model model)
+  {
+      if(principal==null)
+      {
+          return "redirect:/login";
+      }
+      HttpSession session=request.getSession();
+//      session.setAttribute("previo");
+      AddressDto addressDto=addressService.findById(id);
+      model.addAttribute("addressDto",addressDto);
+
+      addressService.deleteById(id);
+      return "redirect:/account";
   }
 
   @PostMapping("/update-address/{id}")
@@ -162,21 +180,8 @@ public class AddressController {
                   return "redirect:/account";
 
   }
-//  @GetMapping("/about")
-//    public String aboutUs(Model model)
-//  {
-//    List<Category>categories =categoryservice.findAllActivatedTrue();
-//    model.addAttribute("categories",categories);
-//    return "about";
-//  }
-//
-//  @GetMapping("/contact")
-//    public String contactUs(Model model)
-//  {
-//      List<Category>categories=categoryservice.findAllActivatedTrue();
-//      model.addAttribute("categories",categories);
-//      return "contact";
-//  }
+// @GetMapping("/delete-address")
+// public String deleteAddress(@ModelAttribute(""))
 
   @GetMapping("/add-profile")
     public String addProfile(Model model,Principal principal)
@@ -193,6 +198,14 @@ public class AddressController {
 
       return "/profile";
   }
+
+//  @GetMapping("/delete/address/{id}")
+//  public String delete(@PathVariable("id")long id, RedirectAttributes redirectAttributes)
+//  {
+//    redirectAttributes.addFlashAttribute("deleted","address deleted");
+//    addressService.deleteById(id);
+//    return "redirect:/profile";
+//  }
 
 
 }

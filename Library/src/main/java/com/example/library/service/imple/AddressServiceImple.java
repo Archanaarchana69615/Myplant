@@ -8,6 +8,8 @@ import com.example.library.service.AddressService;
 import com.example.library.service.CustomerService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class AddressServiceImple implements AddressService {
 
@@ -37,6 +39,7 @@ public class AddressServiceImple implements AddressService {
         address.set_default(false);
         return addressRepository.save(address);
     }
+
 
     @Override
     public AddressDto findById(long id) {
@@ -71,4 +74,39 @@ public class AddressServiceImple implements AddressService {
 
         return addressRepository.save(address);
     }
+
+
+
+//    @Override
+//    public Address findByCustomerId(Customer customer) {
+//
+//        return addressRepository.findByCustomerId(addressRepository);
+//    }
+
+    @Override
+    public Address findByIdOrder(long id) {
+        return addressRepository.findById(id);
+    }
+
+    @Override
+    public Address findDefaultAddress(long customer_id) {
+        return addressRepository.save(findByIdOrder(customer_id));
+    }
+
+    @Override
+    public void deleteById(long id) {
+        Address address = addressRepository.findById(id);
+        if (address != null) {
+//            address.set_activated(true);
+            address.set_deleted(true);
+        }
+            addressRepository.save(address);
+        }
+
+    @Override
+    public List<Address> findTrueById(long id) {
+        return addressRepository.findByTrue(id);
+    }
+
+
 }

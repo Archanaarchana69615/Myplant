@@ -96,6 +96,20 @@
     </li>
 
     <li class="nav-item">
+      <a class="nav-link collapsed" th:href="@{/orders}" data-toggle="collapse" data-target="#customCollapse"
+         aria-expanded="true" aria-controls="customCollapse">
+        <i class="fas fa-fw fa-cog"></i>
+        <span>Order</span>
+      </a>
+      <div id="customCollapse" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+          <a class="collapse-item" th:href="@{/orders}">Order List</a>
+        </div>
+      </div>
+    </li>
+
+
+    <li class="nav-item">
       <a class="nav-link collapsed" th:href="@{/customer}" data-toggle="collapse" data-target="#collapseTwo"
          aria-expanded="true" aria-controls="collapseTwo">
         <i class="fas fa-fw fa-cog"></i>

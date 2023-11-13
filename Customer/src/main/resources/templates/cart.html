@@ -45,7 +45,7 @@
             <tr th:each="cartItem :  ${shoppingCart.cartItems}">
               <td >
                 <img class = "my-product-image" style="height: 40px; width: 40px;" alt="ProductImage"
-                     th:src="@{'/imgs/images/' + ${cartItem.product.images[0].getName()}}" >
+                     th:src="@{'/img/' + ${cartItem.product.images[0].getName()}}" >
               </td>
               <td class="product-des product-name">
                 <a th:href="@{/product-full/{id}(id = ${cartItem.product.id})}">
@@ -110,7 +110,7 @@
             </div>
             <hr>
           </div>
-          <div class="col-12 d-flex shopping-box"><a  th:href="@{/check-out}" class="ml-auto btn hvr-hover">Checkout</a>
+          <div class="col-12 d-flex shopping-box"><a  th:href="@{/checkout}" class="ml-auto btn hvr-hover">Checkout</a>
           </div>
         </div>
 

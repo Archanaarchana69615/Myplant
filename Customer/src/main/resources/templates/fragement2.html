@@ -76,7 +76,7 @@
     <div class="container">
       <div class="header-wrap">
         <div class="logo logo-width-1">
-          <a th:href="@{index}"><img th:src="@{/imgs/theme/logo.png}" alt="logo"></a>
+          <a th:href="@{index}"><img th:src="@{/img/logo.png}" alt="logo"></a>
         </div>
         <div class="header-right">
           <div class="search-style-2">
@@ -112,7 +112,7 @@
     <div class="container">
       <div class="header-wrap header-space-between position-relative">
         <div class="logo logo-width-1 d-block d-lg-none">
-          <a th:href="@{/}"><img th:src="@{/imgs/theme/logo.png}" alt="logo"></a>
+          <a th:href="@{/}"><img th:src="@{/img/logo.png}" alt="logo"></a>
         </div>
         <div class="header-nav d-none d-lg-flex">
           <div class="main-menu main-menu-padding-1 main-menu-lh-2 d-none d-lg-block">
@@ -123,7 +123,7 @@
                 <li>
                   <a th:href="@{/about}">About</a>
                 </li>
-                <li><a th:href="@{/shop-list-right}">Shop</a>
+                <li><a th:href="@{/product-full-list}">Shop</a>
                 </li>
                 <li><a href="#">MultiSelectSearch</a>
                 </li>
@@ -142,12 +142,12 @@
         <p class="mobile-promotion">Happy <span class="text-brand">Mother's Day</span>. Big Sale Up to 40%</p>
         <div class="header-action-right d-block d-lg-none">
           <div class="header-action-2">
-            <div class="header-action-icon-2">
-              <a href="shop-wishlist.html">
-                <img alt="Evara" src="assets/imgs/theme/icons/icon-heart.svg">
-                <span class="pro-count white"></span>
-              </a>
-            </div>
+<!--            <div class="header-action-icon-2">-->
+<!--              <a href="shop-wishlist.html">-->
+<!--                <img alt="Evara" src="assets/imgs/theme/icons/icon-heart.svg">-->
+<!--                <span class="pro-count white"></span>-->
+<!--              </a>-->
+<!--            </div>-->
             <div class="header-action-icon-2">
               <a class="mini-cart-icon" th:href="@{/cart}">
                 <img alt="Evara" th:src="@{/imgs/theme/icons/icon-cart.svg}">
@@ -261,11 +261,11 @@
               </li>
 
               <li>
-                <a th:href="@{/shop-list-right}">Shop</a>
+                <a th:href="@{/product-full-list}">Shop</a>
               </li>
               <li>
 
-                <select class="multi-select-search categories" data-placeholder="Select category" multiple="multiple">
+<!--                <select class="multi-select-search categories" data-placeholder="Select category" multiple="multiple">-->
                   <option th:each="category: ${categories}" th:attr="data-url=@{/categoryWise/{id}(id=${category.id})}" th:text="${category.name}"></option>
                 </select>
 
@@ -456,24 +456,24 @@
   <script th:src="@{/js/shop.js?v=3.4}"></script>
 
   <script>
-    $(document).ready(function () {
-      // Initialize select2 on your select element
-      $('.multi-select-search').select2({
-        placeholder: 'Select categories', // Customize the placeholder text
-        width: '100%', // Customize the width of the dropdown
-        allowClear: true, // Allow clearing selections
-
-      });
-
-      $('.multi-select-search').on('select2:select', function (e) {
-        var selectedOption = e.params.data.element;
-        var url = $(selectedOption).data('url');
-
-        if (url) {
-          window.location.href = url;
-        }
-      });
-    });
+    // $(document).ready(function () {
+    //   // Initialize select2 on your select element
+    //   $('.multi-select-search').select2({
+    //     placeholder: 'Select categories', // Customize the placeholder text
+    //     width: '100%', // Customize the width of the dropdown
+    //     allowClear: true, // Allow clearing selections
+    //
+    //   });
+    //
+    //   $('.multi-select-search').on('select2:select', function (e) {
+    //     var selectedOption = e.params.data.element;
+    //     var url = $(selectedOption).data('url');
+    //
+    //     if (url) {
+    //       window.location.href = url;
+    //     }
+    //   });
+    // });
   </script>
 
 

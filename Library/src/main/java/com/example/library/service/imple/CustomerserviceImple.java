@@ -3,9 +3,11 @@ package com.example.library.service.imple;
 import com.example.library.dto.CustomerDto;
 import com.example.library.model.Address;
 import com.example.library.model.Customer;
+import com.example.library.model.EmailDetails;
 import com.example.library.repository.CustomerRepository;
 import com.example.library.repository.RoleRepository;
 import com.example.library.service.CustomerService;
+import com.example.library.service.EmailService;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +18,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 //@AllArgsConstructor
 //@NoArgsConstructor
@@ -29,20 +32,41 @@ public class CustomerserviceImple implements CustomerService {
     private PasswordEncoder passwordEncoder;
 
 
+   private EmailService emailService;
 
-
-    public CustomerserviceImple(CustomerRepository customerRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder) {
+    public CustomerserviceImple(CustomerRepository customerRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder, EmailService emailService) {
         this.customerRepository = customerRepository;
         this.roleRepository = roleRepository;
         this.passwordEncoder = passwordEncoder;
+        this.emailService = emailService;
     }
+
+    private static final long OTP_VALID_DURATION =1*60*1000;
+
+    public Date getOtpRequestedTime(){
+        return otpRequestedTime;
+    }
+public void setOtpRequestedTime(Date otpRequestedTime)
+{
+    this.otpRequestedTime = otpRequestedTime;
+}
+
+private Date otpRequestedTime;
+
+    long otpRequsetedTimeMillis=0;
 
 
     @Override
     public Customer findByEmail(String username) {
         return customerRepository.findByUsername(username);
     }
- @Override
+
+    @Override
+    public Customer getByResetPassword() {
+        return null;
+    }
+
+    @Override
     public Customer save (CustomerDto customerDto)
  {
      Customer customer= new Customer();
@@ -70,6 +94,28 @@ public class CustomerserviceImple implements CustomerService {
     public Customer findById(long id) {
         return customerRepository.findById(id);
     }
+
+//    @Override
+//    public String otpGenerate(String username) {
+//        return null;
+//    }
+
+//    @Override
+//    public String otpGenerate(String username) {
+//        Customer customer=customerRepository.findByUsername(username);
+//        int otp=(int)(Math.random()*9000)+1000;
+//        customer.setOtp(otp);
+//        customerRepository.save(customer);
+//        setOtpRequestedTime(new Date());
+//        otpRequsetedTimeMillis= otpRequestedTime.getTime();
+//        return emailService.sendSimpleMail(new EmailDetails(username,"your otp for verificatonis"+otp,"verify with otp"));
+//    }
+
+//    @Override
+//    public void updateResetPasswordTocken(String tocken, String email) throws CustomerNotFoundException {
+//
+//    }
+
 
     @Override
     public void disable_enable(long id) {

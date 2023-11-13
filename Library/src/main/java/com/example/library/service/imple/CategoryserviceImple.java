@@ -21,8 +21,9 @@ public class CategoryserviceImple implements Categoryservice{
     {
         try {
             Category categorySave = new Category(category.getName());
-//            Category category = new Category(category.getDescription());
+            categorySave.setDescription(category.getDescription());
             return repo.save(categorySave);
+
         }
             catch(Exception e)
             {
@@ -55,10 +56,10 @@ public class CategoryserviceImple implements Categoryservice{
     }
 
     @Override
-    public Category deleteById(Long id) {
+    public void deleteById(Long id) {
     Category category=repo.getById(id);
     repo.delete(category);
-        return category;
+
     }
 
     @Override

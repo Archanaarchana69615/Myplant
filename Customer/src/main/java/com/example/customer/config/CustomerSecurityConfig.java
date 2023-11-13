@@ -44,6 +44,7 @@ public class CustomerSecurityConfig {
                         .requestMatchers("/dashboard").authenticated()
                         .anyRequest().authenticated()
         )
+                .csrf(csrf -> csrf.disable())
                 .formLogin(
                         form -> form
                                 .loginPage("/login")

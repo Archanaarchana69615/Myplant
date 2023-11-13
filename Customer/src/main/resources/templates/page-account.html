@@ -21,9 +21,9 @@
 
   <div class="mb-5">
 
-    <div th:if = "${text}">
-      <p class = "alert alert-danger" th:text = "${text}"></p>
-    </div>
+<!--    <div th:if = "${text}">-->
+<!--      <p class = "alert alert-danger" th:text = "${text}"></p>-->
+<!--    </div>-->
   </div>
 
 
@@ -33,9 +33,9 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-11 m-auto">
-          <div th:if="${message}" class="alert alert-success">
-            <p th:text="${message}"></p>
-          </div>
+<!--          <div th:if="${message}" class="alert alert-success">-->
+<!--            <p th:text="${message}"></p>-->
+<!--          </div>-->
           <div class="row">
             <div class="col-md-3">
               <div class="dashboard-menu">
@@ -85,22 +85,22 @@
                         <div class="card mb-30" style="border: none;">
                           <div>
                             <label for="fullName" style="color: #888;">Full Name:</label>
-                            <span id="fullName" th:text="${customer.firstName + ' ' + customer.lastName}"></span>
+                            <span id="fullName" th:text="${customer.firstname + ' ' + customer.lastname}"></span>
                           </div><br>
                           <div >
                             <label for="email" style="color: #888;">Email:</label>
                             <span id="email" th:text="${customer.username}"></span>
                           </div><br>
+<!--                          <div>-->
+<!--                            <label for="phone" style="color: #888;">Phone Number:</label>-->
+<!--                            <span id="phone" th:text="${customer.phone}"></span>-->
+<!--                          </div><br>-->
                           <div>
-                            <label for="phone" style="color: #888;">Phone Number:</label>
-                            <span id="phone" th:text="${customer.phoneNumber}"></span>
-                          </div><br>
-                          <div>
-                            <label for="referralCode" style="color: #888;">My referral Code:</label>
-                            <span id="referralCode" th:text="${customer.referralCode}"></span>
+<!--                            <label for="referralCode" style="color: #888;">My referral Code:</label>-->
+<!--                            <span id="referralCode" th:text="${customer.referralCode}"></span>-->
                             <div class="form-group">
                               <input type="email" id="emailAddress" style="width: 50%;" placeholder="Recipient's Email Address">
-                              <button type="button" class=" btn-light" style="margin-top: 11px; padding: 5px 10px; font-size: 10px; border:black;background-color: #e9edeb; border-radius: 5px;" id="shareViaEmailButton" onclick="shareViaEmail()">Share Referral Code via Email</button>
+<!--                              <button type="button" class=" btn-light" style="margin-top: 11px; padding: 5px 10px; font-size: 10px; border:black;background-color: #e9edeb; border-radius: 5px;" id="shareViaEmailButton" onclick="shareViaEmail()">Share Referral Code via Email</button>-->
                             </div>
                           </div>
                         </div>
@@ -131,6 +131,7 @@
                           <th class="total-pr">Payment Method</th>
                           <th>Payment Status</th>
                           <th>Order Tracking</th>
+                          <th>Order Tracking</th>
                           <th>Action</th>
                         </tr>
                         </thead>
@@ -140,11 +141,11 @@
                             <p th:text="${order.id}"></p>
                           </td>
                           <td class="order-date">
-                            <span><b>[(${order.orderDate})]</b></span>
+                            <span><b>[(${order.orderdate})]</b></span>
                           </td>
                           <td class="name-pr" >
                             <a th:if = "${order.accept ==true}" href="#">
-                              [(${order.deliveryDate})]
+                              [(${order.deliverydate})]
                             </a>
                           </td>
                           <td class="price-pr">
@@ -154,10 +155,10 @@
                             <p style="color: red">₹ [(${order.totalPrice})]</p>
                           </td>
                           <td class="total-pr" style="color: black">
-                            <span>[(${order.paymentMethod})]</span>
+                            <span>[(${order.payementMethod})]</span>
                           </td>
                           <td>
-                            <span th:unless="${#strings.equals(order.orderStatus, 'Cancelled')}">[(${order.paymentStatus})]</span>
+                            <span th:unless="${#strings.equals(order.orderStatus, 'Cancelled')}">[(${order.payementStatus})]</span>
                             <span th:if="${#strings.equals(order.orderStatus, 'Cancelled')}">[(${order.orderStatus})]</span>
                           </td>
                           <td>
@@ -185,10 +186,14 @@
                     <a th:href="@{/add-address}" class="plus-button ">
                       <span class="plus-sign"></span> Add New
                     </a>
+<!--                    <div class="row">-->
+<!--                      <a th:href="@{/page-account}" class="plus-button ">-->
+<!--                        <span class="plus-sign"></span> delete-->
+<!--                      </a>-->
                     <!--                                            <div class="col-lg-6" >-->
                     <!--                                                <div class="card mb-3 mb-lg-0">-->
                     <!--                                                    <div class="card-header">-->
-                    <!--                                                        <h5 class="mb-0">Billing Address</h5>-->
+                    <!--                                                        <h5 class="mb-0">Billing  </h5>-->
                     <!--                                                    </div>-->
                     <!--                                                    <div class="card-body">-->
                     <!--                                                        <address>3522 Interstate<br> 75 Business Spur,<br> Sault Ste. <br>Marie, MI 49783</address>-->
@@ -203,7 +208,7 @@
                     <div class="col-lg-6 pt-10">
 
 
-                      <div th:each="address : ${address} ">
+                      <div th:each="address : ${addresses} ">
                         <div class="card mb-30">
                           <div class="card-header">
                             <h5 class="mb-0"><span th:text="${address.addressline1}"></span></h5>
@@ -211,14 +216,17 @@
                           <div class="card-body">
                             <address>
                               <input type="hidden" th:value="${address.id}">
-                              <span th:text="${address.addressLine2}"></span>,<br>
+                              <span th:text="${address.addressline2}"></span>,<br>
                               <span th:text="${address.city}"></span>, <br>
-                              <span th:text="${address.pincode}"></span>,<br>Ph:<span th:text="${customer.phoneNumber}"></span>
+                              <span th:text="${address.pincode}"></span>
+<!--                              <br>Ph:<span th:text="${customer.phonenumber}"></span>-->
                             </address>
                             <p><span th:text="${address.district}"></span></p>
                             <p><span th:text="${address.state}"></span></p>
                             <p><span th:text="${address.country}"></span></p>
                             <a th:href="@{/edit-address/{id} (id=${address.id})}" class="btn-small">Edit</a>
+                            <a th:href="@{/delete-address/{id}(id=${address.id})}" class="btn-small">Delete</a>
+
 
                           </div>
                         </div>
@@ -277,6 +285,7 @@
           </div>
         </div>
       </div>
+    </div>
     </div>
   </section>
 </main>

@@ -16,7 +16,7 @@ public interface Categoryservice {
     Category update(Category category);
 
     Category findById(Long id);
-    Category deleteById(Long id);
+    void deleteById(Long id);
     void enableById(Long id);
 
     void disableById(Long id);

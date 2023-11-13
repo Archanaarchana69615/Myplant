@@ -1,7 +1,9 @@
 package com.example.customer.controller;
 
 import com.example.library.dto.CustomerDto;
+import com.example.library.model.Category;
 import com.example.library.model.Customer;
+import com.example.library.service.Categoryservice;
 import com.example.library.service.CustomerService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -13,11 +15,15 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.List;
+
 @AllArgsConstructor
 @Controller
 public class CustomerController {
 
     private CustomerService customerService;
+
+
 
 
     @RequestMapping(value = "/index" , method = RequestMethod.GET)
@@ -65,6 +71,27 @@ public class CustomerController {
         customerService.save(customerDto);
         return "redirect:/register?success";
     }
+
+//    @GetMapping("/forgot-password")
+//    public String forgotPassword(Model model,CustomerDto customerDto)
+//    {
+//        model.addAttribute("title","forgot otp");
+//        model.addAttribute("username",customerDto);
+//
+//
+//        return "enterUsername";
+//    }
+//
+//    @PostMapping("/forgot-password")
+//    public String forgotPassword(@ModelAttribute("username")CustomerDto customerDto,Model model)
+//    {
+//      String otp=customerService.otpGenerate(customerDto.getUsername());
+//      model.addAttribute("data",customerDto);
+//      model.addAttribute("otpGenerateTime",System.currentTimeMillis());
+//      return "otpScreen";
+//    }
+
+
 
 
     @GetMapping("/about")

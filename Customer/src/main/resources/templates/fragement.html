@@ -87,7 +87,7 @@
         <div class="container">
             <div class="header-wrap header-space-between position-relative">
                 <div class="logo logo-width-1 d-block d-lg-none">
-                    <a th:href="@{/}"><img src="/imgs/theme/logo.png" alt="logo"></a>
+                    <a th:href="@{/}"><img src="/imgs/logo.png" alt="logo"></a>
                 </div>
                 <div class="header-nav d-none d-lg-flex">
                     <div class="main-menu main-menu-padding-1 main-menu-lh-2 d-none d-lg-block">
@@ -98,11 +98,11 @@
                                 <li>
                                     <a th:href="@{/about}">About</a>
                                 </li>
-                                <li><a th:href="@{/products-list}">Shop</a>
+                                <li><a th:href="@{/product-full-list}">Shop</a>
                                 </li>
-                                <li><a th:href="@{/dashboard}">My Account</a>
+                                <li><a th:href="@{/account}">My Account</a>
                                 </li>
-                                <li><a th:href="@{/wallets}">Wallet</a>
+<!--                                <li><a th:href="@{/wallets}">Wallet</a>-->
                                 </li>
                                 <li>
                                     <a th:href="@{/contact}">Contact</a>
@@ -117,12 +117,12 @@
                 <p class="mobile-promotion">Happy <span class="text-brand">Mother's Day</span>. Big Sale Up to 40%</p>
                 <div class="header-action-right d-block d-lg-none">
                     <div class="header-action-2">
-                        <div class="header-action-icon-2">
-                            <a th:href="@{/wishlist}">
-                                <img alt="WishList" src="/imgs/theme/icons/icon-heart.svg">
-                                <span class="pro-count white"></span>
-                            </a>
-                        </div>
+<!--                        <div class="header-action-icon-2">-->
+<!--                            <a th:href="@{/wishlist}">-->
+<!--                                <img alt="WishList" src="/imgs/theme/icons/icon-heart.svg">-->
+<!--                                <span class="pro-count white"></span>-->
+<!--                            </a>-->
+<!--                        </div>-->
                         <div class="header-action-icon-2">
                             <a class="mini-cart-icon" th:href="@{/cart}">
                                 <img alt="Cart" src="/imgs/theme/icons/icon-cart.svg">
@@ -147,7 +147,7 @@
     <div class="mobile-header-wrapper-inner">
         <div class="mobile-header-top">
             <div class="mobile-header-logo">
-                <a th:href="@{/}"><img src="/imgs/theme/logo.png" alt="logo"></a>
+                <a th:href="@{/}"><img src="/imgs/logo.png" alt="logo"></a>
             </div>
             <div class="mobile-menu-close close-style-wrap close-style-position-inherit">
                 <button class="close-style search-close">
@@ -162,15 +162,15 @@
                     <input type="text" placeholder="Search for items..." name="keyword">
                 </form>
             </div>
-            <div class="mobile-menu-wrap mobile-header-border">
-                <div class="main-categori-wrap mobile-header-border">
-                    <a class="categori-button-active-2" href="#">
-                        <span class="fi-rs-apps"></span> Browse Categories
-                    </a>
-                    <div class="categori-dropdown-wrap categori-dropdown-active-small">
-                        <ul th:each="category : ${categories}">
-                            <a th:href="@{/products-list(id=${category.id})}"><li  th:text="${category.name}"></li></a>
-                        </ul>
+<!--            <div class="mobile-menu-wrap mobile-header-border">-->
+<!--                <div class="main-categori-wrap mobile-header-border">-->
+<!--                    <a class="categori-button-active-2" href="#">-->
+<!--                        <span class="fi-rs-apps"></span> Browse Categories-->
+<!--                    </a>-->
+<!--                    <div class="categori-dropdown-wrap categori-dropdown-active-small">-->
+<!--                        <ul th:each="category : ${categories}">-->
+<!--                            <a th:href="@{/products-list(id=${category.id})}"><li  th:text="${category.name}"></li></a>-->
+<!--                        </ul>-->
                     </div>
                 </div>
                 <!-- mobile menu start -->
@@ -182,11 +182,11 @@
                         <li>
                             <a th:href="@{/about}">About</a>
                         </li>
-                        <li><a th:href="@{/products-list}">Shop</a>
+                        <li><a th:href="@{/products-full-list}">Shop</a>
                         </li>
-                        <li><a th:href="@{/dashboard}">My Account</a>
+                        <li><a th:href="@{/account}">My Account</a>
                         </li>
-                        <li><a th:href="@{/wallets}">Wallet</a>
+<!--                        <li><a th:href="@{/wallets}">Wallet</a>-->
                         </li>
                         <li>
                             <a th:href="@{/contact}">Contact</a>
@@ -237,7 +237,7 @@
                         <div id="news-flashs" class="d-inline-block">
                             <ul>
                                 <li>Supper Value Deals - Save more with coupons</li>
-                                <li>Trendy 25silver jewelry, save up 35% off today <a th:href="@{/product-list}">Shop now</a></li>
+                                <li>Trendy 25silver jewelry, save up 35% off today <a th:href="@{/product-full-list}">Shop now</a></li>
                             </ul>
                         </div>
                     </div>
@@ -258,7 +258,7 @@
         <div class="container">
             <div class="header-wrap header-space-between position-relative">
                 <div class="logo logo-width-1">
-                    <a th:href="@{/}"><img src="/imgs/theme/logo.png" alt="logo"></a>
+                    <a th:href="@{/}"><img src="/img/logo.png" alt="logo"></a>
                 </div>
                 <div class="main-menu main-menu-grow main-menu-padding-1 main-menu-lh-1 main-menu-mrg-1 hm3-menu-padding d-none d-lg-block hover-boder">
                     <nav>
@@ -268,11 +268,11 @@
                             <li>
                                 <a th:href="@{/about}">About</a>
                             </li>
-                            <li><a th:href="@{/products-list}">Shop</a>
+                            <li><a th:href="@{/products-full-list}">Shop</a>
                             </li>
-                            <li><a th:href="@{account}">My Account</a>
+                            <li><a th:href="@{/account}">My Account</a>
                             </li>
-                            <li><a th:href="@{/wallets}">Wallet</a>
+<!--                            <li><a th:href="@{/wallets}">Wallet</a>-->
                             </li>
                             <li>
                                 <a th:href="@{/contact}">Contact</a>
@@ -280,13 +280,14 @@
                         </ul>
                     </nav>
                 </div>
+                </div>
 
                 <div class="header-action-2">
-                    <div class="header-action-icon-2">
-                        <a th:href="@{/wishlist}">
-                            <img class="svgInject" alt="WishList" src="/imgs/theme/icons/icon-heart.svg">
-                        </a>
-                    </div>
+<!--                    <div class="header-action-icon-2">-->
+<!--                        <a th:href="@{/wishlist}">-->
+<!--                            <img class="svgInject" alt="WishList" src="/imgs/theme/icons/icon-heart.svg">-->
+<!--                        </a>-->
+<!--                    </div>-->
                     <div class="header-action-icon-2">
                         <a class="mini-cart-icon" th:href="@{/cart}">
                             <img alt="Cart" src="/imgs/theme/icons/icon-cart.svg">
@@ -339,7 +340,7 @@
                 <div class="col-lg-4 col-md-6">
                     <div class="widget-about font-md mb-md-5 mb-lg-0">
                         <div class="logo logo-width-1 wow fadeIn animated">
-                            <a th:href="@{/index}"><img src="/imgs/theme/logo.png" alt="logo"></a>
+                            <a th:href="@{/index}"><img src="/img/logo.png" alt="logo"></a>
                         </div>
                         <h5 class="mt-20 mb-10 fw-600 text-grey-4 wow fadeIn animated">Contact</h5>
                         <p class="wow fadeIn animated">
@@ -376,8 +377,8 @@
                     <h5 class="widget-title wow fadeIn animated">My Account</h5>
                     <ul class="footer-list wow fadeIn animated">
                         <li><a th:href="@{/cart}">View Cart</a></li>
-                        <li><a th:href="@{/wishlist}">My Wishlist</a></li>
-                        <li><a th:href="@{/dashboard}">Account</a></li>
+<!--                        <li><a th:href="@{/wishlist}">My Wishlist</a></li>-->
+                        <li><a th:href="@{/account}">Account</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-4">
@@ -409,7 +410,7 @@
             </div>
             <div class="col-lg-6">
                 <p class="text-lg-end text-start font-sm text-muted mb-0">
-                    Designed by <a th:href="@{/}"  target="_blank">Magnolia Trendz</a>. All rights reserved
+                    Designed by <a th:href="@{/}"  target="_blank">My plants</a>. All rights reserved
                 </p>
             </div>
         </div>

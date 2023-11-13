@@ -27,11 +27,7 @@ public class loginController {
     {
         return "Index";
     }
-//    @GetMapping("/category")
-//    public String getCategory(Model model)
-//    {
-//        return "Index";
-//    }
+
 
 
 }

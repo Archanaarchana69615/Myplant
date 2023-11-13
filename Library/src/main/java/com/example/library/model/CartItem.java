@@ -30,4 +30,16 @@ public class CartItem {
 
     private double unitPrice;
 
+    @Override
+    public String toString() {
+        return "CartItem{" +
+                "id=" + id +
+                ", cart=" + cart.getId() +
+                ", product=" + product.getName() +
+                ", quantity=" + quantity +
+                ", unitPrice=" + unitPrice +
+                ", totalPrice=" +
+                '}';
+    }
+
 }

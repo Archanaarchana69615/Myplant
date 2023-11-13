@@ -47,6 +47,7 @@ public class ProductController {
     }
 
 
+
     @GetMapping("/product-full-list")
     public String productPage(Model model) {
         model.addAttribute("page", "Products");

@@ -24,13 +24,14 @@ public class Order  {
 
     private Long Id;
     private Date orderdate;
-    private Date deliveydate;
+//    private Date deliveydate;
     private String orderStatus;
     private Double shippingPrice;
     private double totalPrice;
     private String payementMethod;
     private String payementStatus;
     private boolean isAccept;
+    private Date deliverydate;
     private int quantity;
 
     @Column(nullable = true)
@@ -55,7 +56,7 @@ public class Order  {
    private LocalDateTime shippedDate;
 
    @Column(nullable = true)
-   private LocalDateTime delivered;
+   private LocalDateTime deliveredDateTime;
 
 
 

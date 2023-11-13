@@ -2,13 +2,13 @@ package com.example.library.model;
 
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.io.Serializable;
 
 @Data
+@Getter
+@Setter
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
@@ -19,9 +19,9 @@ public class OrderDetails  {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "order_detail_id")
     private long Id;
-    private String unitPrice;
-    private String totalPrice;
-    private String quantity;
+    private double unitPrice;
+    private double totalPrice;
+    private int quantity;
 
 
     @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
@@ -33,7 +33,6 @@ public class OrderDetails  {
     @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "order_id",referencedColumnName = "order_id")
     private Order order;
-
 
 
 
