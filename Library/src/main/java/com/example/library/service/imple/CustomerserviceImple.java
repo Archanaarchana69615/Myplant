@@ -26,12 +26,8 @@ import java.util.List;
 public class CustomerserviceImple implements CustomerService {
 
     private CustomerRepository customerRepository;
-
     private RoleRepository roleRepository;
-
     private PasswordEncoder passwordEncoder;
-
-
    private EmailService emailService;
 
     public CustomerserviceImple(CustomerRepository customerRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder, EmailService emailService) {
@@ -41,9 +37,10 @@ public class CustomerserviceImple implements CustomerService {
         this.emailService = emailService;
     }
 
-    private static final long OTP_VALID_DURATION =1*60*1000;
+    private static final long OTP_VALID_DURATION = 1*60*1000;
 
-    public Date getOtpRequestedTime(){
+    public Date getOtpRequestedTime()
+    {
         return otpRequestedTime;
     }
 public void setOtpRequestedTime(Date otpRequestedTime)
@@ -57,18 +54,20 @@ private Date otpRequestedTime;
 
 
     @Override
-    public Customer findByEmail(String username) {
+    public Customer findByEmail(String username)
+    {
         return customerRepository.findByUsername(username);
     }
 
     @Override
-    public Customer getByResetPassword() {
+    public Customer getByResetPassword()
+    {
         return null;
     }
 
     @Override
     public Customer save (CustomerDto customerDto)
- {
+    {
      Customer customer= new Customer();
      customer.setId(customerDto.getId());
      customer.setFirstname(customerDto.getFirstname());
@@ -79,7 +78,7 @@ private Date otpRequestedTime;
      customer.setRoles(Arrays.asList(roleRepository.findByName("CUSTOMER")));
 
      return customerRepository.save(customer);
- }
+    }
 
     @Override
     public List<Customer> findAll() {
@@ -99,7 +98,6 @@ private Date otpRequestedTime;
 //    public String otpGenerate(String username) {
 //        return null;
 //    }
-
 //    @Override
 //    public String otpGenerate(String username) {
 //        Customer customer=customerRepository.findByUsername(username);
@@ -110,12 +108,9 @@ private Date otpRequestedTime;
 //        otpRequsetedTimeMillis= otpRequestedTime.getTime();
 //        return emailService.sendSimpleMail(new EmailDetails(username,"your otp for verificatonis"+otp,"verify with otp"));
 //    }
-
 //    @Override
 //    public void updateResetPasswordTocken(String tocken, String email) throws CustomerNotFoundException {
-//
 //    }
-
 
     @Override
     public void disable_enable(long id) {
@@ -126,7 +121,6 @@ private Date otpRequestedTime;
             customer.set_activated(false);
         }
         customerRepository.save(customer);
-
     }
 
 //    @Override
