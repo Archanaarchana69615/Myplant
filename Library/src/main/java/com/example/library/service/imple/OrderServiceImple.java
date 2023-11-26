@@ -7,6 +7,7 @@ import com.example.library.service.AddressService;
 import com.example.library.repository.OrderDetailRepository;
 import com.example.library.service.OrderService;
 import com.example.library.service.ShoppingCartService;
+import com.example.library.service.WalletService;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -19,18 +20,21 @@ import java.util.List;
 @Service
 public class OrderServiceImple implements OrderService {
 
-    private OrderDetailRepository orderDetailRepository;
-    private OrderRepository orderRepository;
-    private ProductRepository productRepository;
-    private AddressService addressService;
-    private ShoppingCartService shoppingCartService;
+    private final OrderDetailRepository orderDetailRepository;
+    private final OrderRepository orderRepository;
+    private final ProductRepository productRepository;
+    private final AddressService addressService;
+    private final ShoppingCartService shoppingCartService;
 
-    public OrderServiceImple(OrderDetailRepository orderDetailRepository, OrderRepository orderRepository, ProductRepository productRepository, AddressService addressService, ShoppingCartService shoppingCartService) {
+    private final WalletService walletService;
+
+    public OrderServiceImple(OrderDetailRepository orderDetailRepository, OrderRepository orderRepository, ProductRepository productRepository, AddressService addressService, ShoppingCartService shoppingCartService, WalletService walletService) {
         this.orderDetailRepository = orderDetailRepository;
         this.orderRepository = orderRepository;
         this.productRepository = productRepository;
         this.addressService = addressService;
         this.shoppingCartService = shoppingCartService;
+        this.walletService = walletService;
     }
 
     @Override
@@ -93,6 +97,10 @@ public class OrderServiceImple implements OrderService {
         }
         order.setOrderStatus("Cancelled");
         orderRepository.save(order);
+        if(order.getPayementMethod().equals("Wallet")||order.getPayementMethod().equals("Razorpay"))
+        {
+          walletService.returnCredit(order,customer);
+        }
 
     }
 
@@ -114,7 +122,7 @@ public class OrderServiceImple implements OrderService {
     @Override
     public Order save(ShoppingCart cart, long address_id, String paymentMethod,Double OldTotalPrice) {
         Order order = new Order();
-        order.setOrderdate(new Date());
+        order.setOrderDate(new Date());
         order.setCustomer(cart.getCustomer());
         order.setTotalPrice(cart.getTotalPrice());
         order.setQuantity(cart.getTotalItems());
@@ -158,18 +166,29 @@ public class OrderServiceImple implements OrderService {
             errorMessage.append(String.join(", ", outOfStockItems));
 
         }
-        order.setOrderDetailList(orderDetailList);
 
-        if (paymentMethod.equals("COD")) {
+        if(paymentMethod.equals("COD")) {
             order.setPayementStatus("Pending");
             shoppingCartService.deleteCartById(cart.getId());
-        } else {
-            // Handle other payment methods if needed
-            // For payment methods other than COD, you can add custom logic here.
-            // For now, we are setting payment status to "Pending" for all other methods.
-            order.setPayementStatus("Pending");
+        }else if(paymentMethod.equals("Wallet")){
+            order.setPayementStatus("Paid");
             shoppingCartService.deleteCartById(cart.getId());
         }
+
+//        order.setOrderDetailList(orderDetailList);
+//        order.setPayementStatus("pending");
+//        shoppingCartService.deleteCartById(cart.getId());
+
+//        if (paymentMethod.equals("COD")) {
+//            order.setPayementStatus("pending");
+//            shoppingCartService.deleteCartById(cart.getId());
+//        } else {
+//            // Handle other payment methods if needed
+//            // For payment methods other than COD, you can add custom logic here.
+//            // For now, we are setting payment status to "Pending" for all other methods.
+//            order.setPayementStatus("Pending");
+//            shoppingCartService.deleteCartById(cart.getId());
+//        }
         return orderRepository.save(order);
     }
 
@@ -184,5 +203,6 @@ public class OrderServiceImple implements OrderService {
             orderRepository.save(order);
     }
 }
+
 
 }

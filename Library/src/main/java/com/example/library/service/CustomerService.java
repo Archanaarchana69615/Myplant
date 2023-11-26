@@ -1,6 +1,7 @@
 package com.example.library.service;
 
 import com.example.library.dto.CustomerDto;
+import com.example.library.dto.PasswordDto;
 import com.example.library.model.Address;
 import com.example.library.model.Customer;
 import com.example.library.repository.CustomerRepository;
@@ -18,10 +19,14 @@ public interface CustomerService {
 
 
     Customer findByEmail(String email);
+    CustomerDto findByIdProfile(long id);
+
 
     Customer getByResetPassword();
 
     Customer save(CustomerDto customerDto);
+
+    Customer update(CustomerDto customerDto,long id);
 
 
     List<Customer> findAll();
@@ -32,8 +37,15 @@ public interface CustomerService {
 
     Customer findById(long id);
 
+    void changePassword(long id,PasswordDto passwordDto);
 
-//    String otpGenerate(String username);
+
+//    void changePassword(PasswordDto passwordDto, long id);
+
+    String otpGenerate(String username);
+
+    boolean verifyOTP(long otp, String username);
+
 
 //   public void updateResetPasswordTocken(String tocken,String email)throws CustomerNotFoundException
 //   {

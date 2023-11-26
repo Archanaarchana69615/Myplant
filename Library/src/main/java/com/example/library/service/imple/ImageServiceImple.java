@@ -11,7 +11,7 @@ import java.util.Optional;
 @Service
 public class ImageServiceImple implements ImageService {
 
-    private ImageRepository imageRepository;
+    private final ImageRepository imageRepository;
 
     public ImageServiceImple(ImageRepository imageRepository)
     {

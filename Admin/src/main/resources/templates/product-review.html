@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+
+<head th:fragment="header">
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title th:text="${title}" ></title>
+
+    <!-- Custom fonts for this template-->
+    <link th:href="@{/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
+    <link
+            href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+            rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link th:href="@{/css/sb-admin-2.min.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/css/export.css}" rel="stylesheet" type="text/css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/he/1.2.0/he.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.70/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.70/vfs_fonts.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+
+
+
+</head>
+
+
+<body id="page-top">
+<!-- Page Wrapper -->
+<div id="wrapper">
+    <!-- Sidebar -->
+    <ul th:replace="~{fragment2 :: sidebar}">
+    </ul>
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
+            <!-- Topbar -->
+            <nav th:replace="~{fragment2 :: topbar}"></nav>
+    </div>
+    <section class="content-main">
+        <div class="content-header">
+            <div>
+                <h2 class="content-title card-title">Reviews</h2>
+            </div>
+<!--            -->
+        </div>
+        <div class="card mb-4">
+            <header class="card-header">
+                <div class="row gx-3">
+<!--                    <div class="col-lg-4 col-md-6 me-auto">-->
+<!--                        <input type="text" placeholder="Search..." class="form-control" />-->
+<!--                    </div>-->
+                    <div class="col-lg-2 col-md-3 col-6">
+                        <select class="form-select">
+                            <option>Status</option>
+                            <option>Active</option>
+                            <option>Disabled</option>
+                            <option>Show all</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-2 col-md-3 col-6">
+                        <select class="form-select">
+                            <option>Show 20</option>
+                            <option>Show 30</option>
+                            <option>Show 40</option>
+                        </select>
+                    </div>
+                </div>
+            </header>
+
+            <div class="comments-area">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <h4 class="mb-30">Review</h4>
+                            <div class="comment-form">
+
+
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="comment-list">
+                                <div class="single-comment justify-content-between d-flex" th:each="review:${reviews}">
+                                    <div class="user justify-content-between d-flex" >
+                                        <div class="thumb text-center col-md-4">
+                                            <!-- <img src="assets/imgs/page/avatar-6.jpg" alt=""> -->
+                                            <h6><a href="#" th:text="${review.customer.firstname}"></a></h6>
+
+                                        </div>
+                                        <div class="desc col-md-8">
+
+                                            <p th:text="${review.comment}">.</p>
+                                            <div class="d-flex justify-content-between">
+                                                <div class="d-flex align-items-center">
+                                                    <p class="font-xs mr-30" >
+                                                        <small th:text="${review.reviewDate}">
+
+                                                        </small>
+                                                    </p>
+                                                    <!-- <a href="#" class="text-brand btn-reply">Reply <i class="fi-rs-arrow-right"></i> </a> -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+        </div>
+        </div>
+    </section> <!-- content-main end// -->
+    <div th:replace="~{fragment2::footer}">
+
+    </div>
+</main>
+<div th:replace="~{fragment2::script}">
+
+</div>
+    </div>
+</div>
+
+</body>
+
+</html>

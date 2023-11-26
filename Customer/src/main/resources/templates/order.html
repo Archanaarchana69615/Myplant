@@ -31,14 +31,14 @@
               <th>Total Price</th>
               <th class="total-pr">Payment Method</th>
               <th>Payment Status</th>
-              <th>Order details</th>
+<!--              <th>Order details</th>-->
               <th>Action</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="order : ${orders}">
               <td class="order-date">
-                <span><b>[(${order.orderdate})]</b></span>
+                <span><b>[(${order.orderDate})]</b></span>
               </td>
               <td class="name-pr" >
                 <a th:if = "${order.accept ==true}" href="#">
@@ -58,11 +58,11 @@
                 <span th:unless="${#strings.equals(order.orderStatus, 'Cancelled')}">[(${order.payementStatus})]</span>
                 <span th:if="${#strings.equals(order.orderStatus, 'Cancelled')}">[(${order.orderStatus})]</span>
               </td>
+<!--              <td>-->
+<!--                <a th:href="@{/order-view/{id}(id = ${order.id})}">View Order</a>-->
+<!--              </td>-->
               <td>
-                <a th:href="@{/order-tracking/{id}(id = ${order.id})}">View Order</a>
-              </td>
-              <td>
-                <!--                                    <a th:href="@{/order-view/{id}(id = ${order.id})}" class="button-cancel" >View</a>-->
+<!--                                                    <a th:href="@{/order-view/{id}(id = ${order.id})}" class="button-cancel" >View</a>-->
                 <a th:if="${order.orderStatus=='Delivered'}" th:href="@{/return-order/{id}(id = ${order.id})}" class="button-cancel" onclick="if (!(confirm('Are you sure you want to Return this Order?'))) return false" >Return</a>
                 <a  th:unless="${order.orderStatus=='Cancelled' or order.orderStatus == 'Delivered'}" th:href="@{/cancel-order/{id}(id = ${order.id})}" class="button-cancel"
                     onclick="if (!(confirm('Are you sure you want to Cancel this Order?'))) return false">Cancel</a>

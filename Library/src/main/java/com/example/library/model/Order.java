@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -23,8 +24,7 @@ public class Order  {
     @Column(name = "order_id")
 
     private Long Id;
-    private Date orderdate;
-//    private Date deliveydate;
+    private Date orderDate;
     private String orderStatus;
     private Double shippingPrice;
     private double totalPrice;
@@ -46,6 +46,7 @@ public class Order  {
     @JoinColumn(name = "customer_id",referencedColumnName = "customer_id")
    private Customer customer;
 
+   @ToString.Exclude
    @OneToMany(mappedBy = "order",cascade = CascadeType.ALL)
    private List<OrderDetails>orderDetailList;
 
@@ -57,8 +58,5 @@ public class Order  {
 
    @Column(nullable = true)
    private LocalDateTime deliveredDateTime;
-
-
-
 
 }

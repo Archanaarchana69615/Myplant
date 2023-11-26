@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org/">
 
-<head th:replace="~{fragments :: header}">
+<head th:replace="~{fragment2 :: header}">
 
 
 </head>
@@ -9,7 +9,7 @@
 <!-- Page Wrapper -->
 <div id="wrapper">
   <!-- Sidebar -->
-  <ul th:replace="~{fragments :: sidebar}"></ul>
+  <ul th:replace="~{fragment2 :: sidebar}"></ul>
   <!-- End of Sidebar -->
 
   <!-- Content Wrapper -->
@@ -19,7 +19,7 @@
     <div id="content">
 
       <!-- Topbar -->
-      <nav th:replace="~{fragments :: topbar}"></nav>
+      <nav th:replace="~{fragment2 :: topbar}"></nav>
       <!-- End of Topbar -->
 
 
@@ -52,7 +52,7 @@
                 <div class="text">
                   <h6 class="mb-1">Customer:</h6>
                   <p class="mb-1">
-                    [(${order.customer.firstName})] <br> [(${order.customer.username})] <br> [(${order.customer.phoneNumber})]
+                    [(${order.customer.firstname})] <br> [(${order.customer.username})] <br> [(${order.customer.mobilenumber})]
                   </p>
                 </div>
               </article>
@@ -65,7 +65,7 @@
                 <div class="text">
                   <h6 class="mb-1">Order info:</h6>
                   <p class="mb-1">
-                    Shipping: Fedex express <br> Pay method: [(${order.paymentMethod})]
+                    Shipping: Fedex express <br> Pay method: [(${order.payementMethod})]
                   </p>
                 </div>
               </article>
@@ -78,7 +78,7 @@
                 <div class="text">
                   <h6 class="mb-1">Delivey Address:</h6>
                   <p class="mb-1">
-                    [(${order.shippingAddress.addressLine1})] <br>[(${order.shippingAddress.addressLine2})]<br> [(${order.shippingAddress.city})] <br> [(${order.shippingAddress.district})] <br> [(${order.shippingAddress.state})] <br>
+                    [(${order.shippingAddress.addressline1})] <br>[(${order.shippingAddress.addressline2})]<br> [(${order.shippingAddress.city})] <br> [(${order.shippingAddress.district})] <br> [(${order.shippingAddress.state})] <br>
                     [(${order.shippingAddress.country})] <br> [(${order.shippingAddress.pincode})]
                   </p>
                 </div>
@@ -105,7 +105,7 @@
                     <td>
                       <a class="itemside">
                         <div class="left">
-                          <img style="height: 80px; width: 80px;" th:if="${orderDetail.product != null}"  th:src="${'/admin/img/image-product/'+orderDetail.product.imageUrls[0]}" class="img-xs" alt="Item">
+<!--                          <img style="height: 80px; width: 80px;" th:if="${orderDetail.product != null}"  th:src="${'/img/image-product/'+orderDetail.product.imageUrls[0]}" class="img-xs" alt="Item">-->
                           <span th:unless="${orderDetail.product != null}">
                                                             Product Not Available
                                                 </span>
@@ -167,7 +167,7 @@
                             <span class="badge rounded-pill alert-success text-success">Order [(${order.orderStatus})]</span>
                           </dd>
                           <dd>
-                            <span class="badge rounded-pill alert-success text-success">Payment [(${order.paymentStatus})]</span>
+                            <span class="badge rounded-pill alert-success text-success">Payment [(${order.payementStatus})]</span>
                           </dd>
                         </dl>
                       </article>
@@ -193,12 +193,12 @@
 <!-- End of Page Wrapper -->
 
 <!-- Scroll to Top Button-->
-<a th:replace="~{fragments :: scroll}">
+<a th:replace="~{fragment2 :: scroll}">
 </a>
 
 
 <!-- Bootstrap core JavaScript-->
-<div th:replace="~{fragments :: script}"></div>
+<div th:replace="~{fragment2 :: script}"></div>
 <script th:src="@{/js/categories.js}"></script>
 
 <script>

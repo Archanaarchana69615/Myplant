@@ -1,6 +1,7 @@
 package com.example.library.service;
 
 
+import com.example.library.model.Customer;
 import com.example.library.model.Order;
 import com.example.library.model.ShoppingCart;
 import org.springframework.stereotype.Service;
@@ -25,6 +26,7 @@ public interface OrderService {
     String getOrderStatus(Long orderId);
 
     void updatePayment(Order order,boolean status);
+
 
 
 

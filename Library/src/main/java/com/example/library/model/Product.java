@@ -8,6 +8,7 @@ import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.util.List;
 
@@ -29,6 +30,7 @@ public class Product {
     private int currentQuantity;
     private double costPrice;
     private double salePrice;
+    @ToString.Exclude
     @OneToMany(mappedBy = "product",cascade = CascadeType.ALL)
     private List<Image> images;
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -37,7 +39,7 @@ public class Product {
     private boolean is_activated;
     private boolean is_deleted;
 
-
+  @ToString.Exclude
     @ElementCollection
     @CollectionTable(name = "product_image_urls", joinColumns = @JoinColumn(name = "product_id"))
     private List<String>imageUrls;

@@ -1,6 +1,7 @@
 package com.example.library.service.imple;
 
 import com.example.library.dto.CustomerDto;
+import com.example.library.dto.PasswordDto;
 import com.example.library.model.Address;
 import com.example.library.model.Customer;
 import com.example.library.model.EmailDetails;
@@ -8,36 +9,30 @@ import com.example.library.repository.CustomerRepository;
 import com.example.library.repository.RoleRepository;
 import com.example.library.service.CustomerService;
 import com.example.library.service.EmailService;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 //@AllArgsConstructor
 //@NoArgsConstructor
 @Service
-public class CustomerserviceImple implements CustomerService {
+public class CustomerserviceImpl implements CustomerService {
 
-    private CustomerRepository customerRepository;
-    private RoleRepository roleRepository;
-    private PasswordEncoder passwordEncoder;
-   private EmailService emailService;
+    private final CustomerRepository customerRepository;
+    private final RoleRepository roleRepository;
+    private final PasswordEncoder passwordEncoder;
+   private final EmailService emailService;
 
-    public CustomerserviceImple(CustomerRepository customerRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder, EmailService emailService) {
+    public CustomerserviceImpl(CustomerRepository customerRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder, EmailService emailService) {
         this.customerRepository = customerRepository;
         this.roleRepository = roleRepository;
         this.passwordEncoder = passwordEncoder;
         this.emailService = emailService;
     }
 
-    private static final long OTP_VALID_DURATION = 1*60*1000;
+    private static final long OTP_VALID_DURATION = 60 * 1000;
 
     public Date getOtpRequestedTime()
     {
@@ -60,6 +55,17 @@ private Date otpRequestedTime;
     }
 
     @Override
+    public CustomerDto findByIdProfile(long id) {
+        Customer customer=customerRepository.findById(id);
+        CustomerDto customerDto =new CustomerDto();
+        customerDto.setId(customer.getId());
+        customerDto.setLastname(customer.getLastname());
+        customerDto.setFirstname(customer.getFirstname());
+        customerDto.setMobilenumber(customer.getMobilenumber());
+        return customerDto;
+    }
+
+    @Override
     public Customer getByResetPassword()
     {
         return null;
@@ -75,9 +81,20 @@ private Date otpRequestedTime;
      customer.setMobilenumber(customerDto.getMobilenumber());
      customer.setUsername(customerDto.getUsername());
      customer.setPassword(passwordEncoder.encode(customerDto.getPassword()));
-     customer.setRoles(Arrays.asList(roleRepository.findByName("CUSTOMER")));
+     customer.setRoles(Collections.singletonList(roleRepository.findByName("CUSTOMER")));
 
      return customerRepository.save(customer);
+    }
+
+    @Override
+    public Customer update(CustomerDto customerDto, long id) {
+        Customer customer=customerRepository.findById(id);
+
+        customer.setFirstname(customerDto.getFirstname());
+        customer.setLastname(customerDto.getLastname());
+        customer.setMobilenumber(customerDto.getMobilenumber());
+
+        return customerRepository.save(customer);
     }
 
     @Override
@@ -93,6 +110,40 @@ private Date otpRequestedTime;
     public Customer findById(long id) {
         return customerRepository.findById(id);
     }
+
+    @Override
+    public void changePassword(long id, PasswordDto passwordDto) {
+        Customer customer=customerRepository.findById(id);
+        customer.setPassword(passwordDto.getPassword());
+        customer.setUpdateOn(new Date());
+        customerRepository.save(customer);
+
+    }
+
+    @Override
+    public String otpGenerate(String username) {
+        Customer customer=customerRepository.findByUsername(username);
+        int otp= (int)(Math.random()*9000)+1000;
+        customer.setOtp((long) otp);
+        customerRepository.save(customer);
+        setOtpRequestedTime(new Date());
+        otpRequsetedTimeMillis = otpRequestedTime.getTime();
+        return emailService.sendSimpleMail(new EmailDetails(username,"Your OTP for verification is "+otp,"Verify with OTP"));
+
+    }
+
+    @Override
+    public boolean verifyOTP(long otp, String username) {
+
+        Customer customer=customerRepository.findByUsername(username);
+        long currentTimeInMillis=System.currentTimeMillis();
+        System.out.println("currentTimeInMillis:"+currentTimeInMillis);
+        System.out.println("otpRequestedTimeMillis"+otpRequsetedTimeMillis);
+        if(otpRequsetedTimeMillis + OTP_VALID_DURATION > currentTimeInMillis) {
+            return otp == customer.getOtp();
+        }else{
+            return false;
+        }    }
 
 //    @Override
 //    public String otpGenerate(String username) {
@@ -115,11 +166,7 @@ private Date otpRequestedTime;
     @Override
     public void disable_enable(long id) {
         Customer customer = customerRepository.getReferenceById(id);
-        if (customer.is_activated()==false){
-            customer.set_activated(true);
-        }else {
-            customer.set_activated(false);
-        }
+        customer.set_activated(!customer.is_activated());
         customerRepository.save(customer);
     }
 

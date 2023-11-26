@@ -2,6 +2,7 @@ package com.example.library.service;
 
 import com.example.library.dto.ProductDto;
 import com.example.library.model.Product;
+import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,7 @@ public interface Productservice  {
 
     ProductDto findById(Long id);
 
+    Product findBYId(long id);
 
     List<ProductDto> findAllByOrder();
 
@@ -33,4 +35,9 @@ public interface Productservice  {
 
 
     List<ProductDto> findAllProducts();
+
+    Page<Product> getAllProducts(int pageNo);
+
+    Product getById(Long id);
+
 }

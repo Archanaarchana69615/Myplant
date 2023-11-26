@@ -14,9 +14,11 @@ import com.example.library.service.Categoryservice;
 import com.example.library.service.CustomerService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import org.aspectj.apache.bcel.util.Repository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -180,9 +182,6 @@ public class AddressController {
                   return "redirect:/account";
 
   }
-// @GetMapping("/delete-address")
-// public String deleteAddress(@ModelAttribute(""))
-
   @GetMapping("/add-profile")
     public String addProfile(Model model,Principal principal)
   {
@@ -199,13 +198,44 @@ public class AddressController {
       return "/profile";
   }
 
-//  @GetMapping("/delete/address/{id}")
-//  public String delete(@PathVariable("id")long id, RedirectAttributes redirectAttributes)
-//  {
-//    redirectAttributes.addFlashAttribute("deleted","address deleted");
-//    addressService.deleteById(id);
-//    return "redirect:/profile";
-//  }
+
+    @GetMapping("/edit-profile/{id}")
+    public String editProfile(Model model, @PathVariable("id")Long id,Principal principal,HttpServletRequest request)
+    {
+        if(principal==null)
+        {
+            return "redirect:/login";
+        }
+        HttpSession session= request.getSession();
+        String previousPageUrl = request.getHeader("referer");
+        session.setAttribute("previousPageUrl",previousPageUrl);
+        CustomerDto customerDto=customerService.findByIdProfile(id);
+        model.addAttribute("customerDto",customerDto);
+        return "edit-profile";
+    }
+
+    @PostMapping("/update-profile/{id}")
+    public String updateProfile(@PathVariable("id")Long id,HttpServletRequest request,Principal principal,@ModelAttribute CustomerDto customerDto,RedirectAttributes redirectAttributes)
+    {
+        if(principal==null)
+        {
+            return "redirect:/login";
+        }
+        HttpSession session= request.getSession();
+        String previousPageUrl = (String) session.getAttribute("previousPageUrl");
+
+        String referer = request.getHeader("referer");
+
+        Customer newcustomer=customerService.update(customerDto,id);
+        redirectAttributes.addFlashAttribute("message","profile updated");
+        if(previousPageUrl != null)
+        {
+            return "redirect:"+ previousPageUrl;
+        }
+        else {
+            return "redirect:/accounts";
+        }
+    }
 
 
 }

@@ -15,9 +15,9 @@ import java.util.Set;
 
 @Service
 public class ShoppingCartServiceImple implements ShoppingCartService {
-    private CustomerService customerService;
-    private CartItemRepository cartItemRepository;
-    private ShoppingCartRepository shoppingCartRepository;
+    private final CustomerService customerService;
+    private final CartItemRepository cartItemRepository;
+    private final ShoppingCartRepository shoppingCartRepository;
 
     public ShoppingCartServiceImple(CustomerService customerService,CartItemRepository cartItemRepository,ShoppingCartRepository shoppingCartRepository) {
         this.customerService = customerService;
@@ -218,8 +218,27 @@ public ShoppingCart addItemToCart(ProductDto productDto, int quantity, String us
     }
 
     @Override
-    public ShoppingCart deleteCartById(Long id) {
-        return null;
+    public void deleteCartById(Long id) {
+        ShoppingCart shoppingCart = shoppingCartRepository.getById(id);
+        for (CartItem cartItem : shoppingCart.getCartItems()) {
+            cartItem.setCart(null);
+            cartItemRepository.deleteById(cartItem.getId());
+
+        }
+        shoppingCart.setCustomer(null);
+        shoppingCart.getCartItems().clear();
+        shoppingCart.setTotalPrice(0);
+        shoppingCart.setTotalItems(0);
+        shoppingCartRepository.save(shoppingCart);
+    }
+
+    @Override
+    public ShoppingCart updateTotalPrice(Double newTotalPrice, String username) {
+        Customer customer=customerService.findByEmail(username);
+        ShoppingCart shoppingcart=customer.getCart();
+        shoppingcart.setTotalPrice(newTotalPrice);
+        shoppingCartRepository.save(shoppingcart);
+        return shoppingcart;
     }
 
     private CartItem find(Set<CartItem>cartItems,long productId, String size){

@@ -23,11 +23,12 @@ public class OrderDetails  {
     private double totalPrice;
     private int quantity;
 
+    private int month;
+    private int year;
 
     @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "product_id",referencedColumnName = "product_id")
      private Product product;
-
 
 
     @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)

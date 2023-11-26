@@ -1,5 +1,6 @@
 package com.example.customer.config;
 
+import com.example.library.model.Customer;
 import org.springframework.security.core.GrantedAuthority;
 
 import java.io.Serializable;
@@ -14,6 +15,7 @@ public class CustomerDetails extends org.springframework.security.core.userdetai
     private String mobilenumber;
 
     private boolean is_activated;
+
 
     public CustomerDetails(String username, String password, Collection<? extends GrantedAuthority> authorities,String firstname,String lastname, String mobilenumber,boolean is_activated ) {
         super(username, password, authorities);

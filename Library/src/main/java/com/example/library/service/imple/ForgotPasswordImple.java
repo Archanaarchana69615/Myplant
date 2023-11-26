@@ -4,7 +4,7 @@ import com.example.library.repository.CustomerRepository;
 
 public class ForgotPasswordImple {
 
-    private CustomerRepository customerRepository;
+    private final CustomerRepository customerRepository;
 
     public ForgotPasswordImple(CustomerRepository customerRepository) {
         this.customerRepository = customerRepository;

@@ -11,6 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
+import java.util.Collections;
 
 
 @Service
@@ -36,7 +37,7 @@ BCryptPasswordEncoder passwordEncoder=new BCryptPasswordEncoder();
         admin.setLastName("cs");
         admin.setUsername("archanaarchana69615@gmail.com");
         admin.setPassword(passwordEncoder.encode(str));
-        admin.setRoles(Arrays.asList(roleRepository.findByName("ADMIN")));
+        admin.setRoles(Collections.singletonList(roleRepository.findByName("ADMIN")));
         return adminRepository.save(admin);
     }
 

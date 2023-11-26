@@ -22,11 +22,11 @@ public class loginController {
     {
         return "login";
     }
-    @GetMapping("/index")
-    public String HomePage(Model model)
-    {
-        return "Index";
-    }
+//    @GetMapping("/index")
+//    public String HomePage(Model model)
+//    {
+//        return "Index";
+//    }
 
 
 

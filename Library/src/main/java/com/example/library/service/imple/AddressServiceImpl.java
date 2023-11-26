@@ -11,13 +11,13 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class AddressServiceImple implements AddressService {
+public class AddressServiceImpl implements AddressService {
 
-    private CustomerService customerService;
+    private final CustomerService customerService;
 
-    private AddressRepository addressRepository;
+    private final AddressRepository addressRepository;
 
-    public AddressServiceImple(CustomerService customerService, AddressRepository addressRepository) {
+    public AddressServiceImpl(CustomerService customerService, AddressRepository addressRepository) {
         this.customerService = customerService;
         this.addressRepository = addressRepository;
     }

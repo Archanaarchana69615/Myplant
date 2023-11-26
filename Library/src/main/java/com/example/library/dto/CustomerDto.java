@@ -40,7 +40,10 @@ public class CustomerDto {
     private boolean is_activated;
 
 //    @Column
-//    private long otp;
+    private Long otp;
+
+    private String repeatPassword;
+
 
 //   private boolean deleted;
 

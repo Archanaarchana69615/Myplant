@@ -5,6 +5,7 @@ import com.example.library.model.Product;
 import com.example.library.repository.*;
 import com.example.library.service.Productservice;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -19,11 +20,11 @@ import java.util.List;
 public class ProductserviceImple implements Productservice {
 
 
-    private ProductRepository productRepository;
+    private final ProductRepository productRepository;
 
-    private ImageRepository imageRepository;
+    private final ImageRepository imageRepository;
 
-    private ImageUpload imageUpload;
+    private final ImageUpload imageUpload;
 
     public ProductserviceImple(ProductRepository productRepository, ImageRepository imageRepository, ImageUpload imageUpload) {
         this.productRepository = productRepository;
@@ -59,6 +60,12 @@ public class ProductserviceImple implements Productservice {
     }
 
     @Override
+    public Product findBYId(long id) {
+        return productRepository.findById(id);
+    }
+
+
+    @Override
     public List<ProductDto> findAllByOrder() {
         return null;
     }
@@ -74,6 +81,7 @@ public class ProductserviceImple implements Productservice {
             productUpdate.setDescription(productDto.getDescription());
             productUpdate.setSalePrice(productDto.getSalesPrice());
             productUpdate.setCostPrice(productDto.getCostPrice());
+            productUpdate.setCurrentQuantity(productDto.getCurrentQuantity());
             productRepository.save(productUpdate);
             if (imageProducts != null && !imageProducts.isEmpty() && imageProducts.size() != 1) {
                 List<Image> imagesList = new ArrayList<>();
@@ -173,6 +181,18 @@ public class ProductserviceImple implements Productservice {
         return productDtos;
     }
 
+    @Override
+    public Page<Product> getAllProducts(int pageNo) {
+        Pageable pageable=PageRequest.of(pageNo,6);
+        Page<Product>products=this.productRepository.findAllProductPagable(pageable);
+        return products;
+    }
+
+    @Override
+    public Product getById(Long id) {
+        return productRepository.getById(id);
+    }
+
 
 //    @Override
 //    public List<ProductDto> findAllProducts() {
@@ -194,6 +214,7 @@ public class ProductserviceImple implements Productservice {
             productDto.setImage(product.getImages());
             productDto.setCategory(product.getCategory());
             productDto.setActivated(product.is_activated());
+            productDto.setCurrentQuantity(product.getCurrentQuantity());
             productDtos.add(productDto);
         }
         return productDtos;

@@ -52,11 +52,12 @@ public class Customer implements Serializable {
 
     private String username;
 
-//    private long otp;
+    private Long otp;
 
 //   private String email;
 
     private String password;
+    @ToString.Exclude
     @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL)
     private List<Address> addresses;
 
@@ -64,6 +65,7 @@ public class Customer implements Serializable {
 
     private String mobilenumber;
 
+    @ToString.Exclude
     @ManyToMany(fetch= FetchType.EAGER,cascade = CascadeType.ALL)
     @JoinTable(name="customer_roles",joinColumns = @JoinColumn(name = "customer_id",referencedColumnName = "customer_id"),
     inverseJoinColumns = @JoinColumn(name = "role_id",referencedColumnName = "role_id"))
@@ -73,11 +75,19 @@ public class Customer implements Serializable {
 
 //   private boolean deleted;
 
+    @ToString.Exclude
     @OneToOne(mappedBy = "customer",cascade = CascadeType.ALL)
   private ShoppingCart cart;
 
+    @ToString.Exclude
     @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL)
     private List<Order>Orders;
+
+    private Date updateOn;
+
+    @ToString.Exclude
+    @OneToOne(mappedBy = "customer")
+    private Wallet wallet;
 
 //    @Column(name="reset_password_tocken")
 //    private String resetPasswordTocken;

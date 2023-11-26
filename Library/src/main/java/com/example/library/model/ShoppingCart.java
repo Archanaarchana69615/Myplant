@@ -25,7 +25,7 @@ public class ShoppingCart {
     private double totalPrice;
 
     private int totalItems;
-
+    @ToString.Exclude
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cart")
     private Set<CartItem> cartItems;
 

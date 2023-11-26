@@ -1,19 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th = "https://www.thymeleaf.org/">
-<head th:replace="~{fragments::head}">
+<head th:replace="~{fragement2::head}">
 
 
 </head>
 
 
 <body>
-<header th:replace="~{fragments::topbar}">
+<header th:replace="~{fragement2::topbar}">
 </header>
-
-<section class="pt-150 pb-150">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-10 m-auto">
 
 
         <div class="row">
@@ -65,12 +60,12 @@
 
 
 
-<footer th:replace="~{fragments::downbar}">
+<footer th:replace="~{fragement2::downbar}">
 
 </footer>
 
 
-<div th:replace = "~{fragments::script}"></div>
+<div th:replace = "~{fragement2::script}"></div>
 
 <script th:inline="javascript">
   // Get the OTP expiry duration in milliseconds from the server-side
