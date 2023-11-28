@@ -55,6 +55,7 @@ public class CouponController {
         if(principal==null)
         {
             return "redirect:/login";
+
         }
         List<ProductDto>productList=productservice.findAllProducts();
         List<Category>categoryList=categoryservice.findAllActivatedTrue();
