@@ -21,7 +21,11 @@
         <div th:if="${success}" class="text-center alert-success alert">
           <p th:text="${success}"></p>
         </div>
+        <div id="content-wrapper" class="d-flex flex-column">
+
         <div class="table-main table-responsive">
+          <button class="-align-right" onClick="printOut('content-wrapper')">Print</button>
+
           <table class="table" id="orderTable">
             <thead>
             <tr>
@@ -34,7 +38,6 @@
 
 <!--              <th>Order details</th>-->
               <th>Action</th>
-              <th>Order View</th>
             </tr>
             </thead>
             <tbody>
@@ -106,9 +109,17 @@
             }
     );
   });
+
+  function printOut(divId) {
+    const printOutContent = document.getElementById(divId).innerHTML;
+    const originalContent = document.body.innerHTML;
+    document.body.innerHTML = printOutContent;
+    window.print();
+    document.body.innerHTML = originalContent;
+  }
 </script>
 
-
+</div>
 </body>
 
 </html>

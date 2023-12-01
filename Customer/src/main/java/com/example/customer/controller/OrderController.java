@@ -111,15 +111,13 @@ public class OrderController {
             name = httpServletRequest.getRemoteUser();
         }
         model.addAttribute("name",name);
-        System.out.println("hhh");
         return "checkout";
     }
 
     @RequestMapping(value = "check-out/apply-coupon",method = RequestMethod.POST,params = "action=apply")
     public String applyCoupon(@RequestParam("couponCode")String couponCode,Principal principal,RedirectAttributes attributes,HttpSession session) {
-        System.out.println("llll");
+
         if (couponService.findByCouponCode(couponCode.toUpperCase())) {
-            System.out.println("haii");
             Coupon coupon = couponService.findByCode(couponCode.toUpperCase());
             ShoppingCart cart = customerService.findByEmail(principal.getName()).getCart();
             double totalPrice = cart.getTotalPrice();
@@ -219,16 +217,18 @@ public String createOrder(@RequestBody Map<String, Object> data, Principal princ
             @ResponseBody
             public String verifyPayment(@RequestBody Map<String,Object> data,HttpSession session,Principal principal)throws RazorpayException
             {
+                System.out.println(data);
                String secret="hugBadNfp6CQBpm8xiBl40yI";
                String order_id=data.get("razorpay_order_id").toString();
-               String payment_id=data.get("razorpay_payment_method").toString();
+               String payment_id=data.get("razorpay_payment_id").toString();
                String signature=data.get("razorpay_signature").toString();
                JSONObject options =new JSONObject();
                options.put("razorpay_order_id",order_id);
-               options.put("razorpay_payment_method",payment_id);
+               options.put("razorpay_payment_id",payment_id);
                options.put("razorpay_signature",signature);
 
-               boolean status= Utils.verifyPaymentSignature(options,secret);
+
+                boolean status= Utils.verifyPaymentSignature(options,secret);
                Order order=orderService.findOrderById((Long)session.getAttribute("orderId"));
                if(status)
                {

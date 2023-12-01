@@ -122,7 +122,7 @@
 
 
                 <div class="tab-pane fade" id="orders" role="tabpanel" aria-labelledby="orders-tab">
-                  <button class="-align-right" onClick="printOut('content-wrapper')">Print</button>
+<!--                  <button class="-align-right" onClick="printOut('content-wrapper')">Print</button>-->
 
                   <div class="card">
                     <div class="card-header">
@@ -311,17 +311,17 @@
 
 <div th:replace = "~{fragement2::script}"></div>
 
-<script>
-  function printOut(divId) {
-    const printOutContent = document.getElementById(divId).innerHTML;
-    const originalContent = document.body.innerHTML;
-    document.body.innerHTML = printOutContent;
-    window.print();
-    document.body.innerHTML = originalContent;
-  }
+<!--<script>-->
+<!--  function printOut(divId) {-->
+<!--    const printOutContent = document.getElementById(divId).innerHTML;-->
+<!--    const originalContent = document.body.innerHTML;-->
+<!--    document.body.innerHTML = printOutContent;-->
+<!--    window.print();-->
+<!--    document.body.innerHTML = originalContent;-->
+<!--  }-->
 
 
-</script>
+<!--</script>-->
 
 
 </body>

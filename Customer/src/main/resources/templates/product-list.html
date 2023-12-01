@@ -142,18 +142,18 @@
 <!--                                            <span class="qty-val">1</span>-->
 <!--                                            <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>-->
 <!--                                        </div>-->
-                                        <div class="product-extra-link2">
-                                            <form id="addToCart" th:action="@{/add-to-cart}" method="post">
+<!--                                        <div class="product-extra-link2">-->
+<!--                                            <form id="addToCart" th:action="@{/add-to-cart}" method="post">-->
 
-                                                <div>
+<!--                                                <div>-->
                                                     <input type="number" name="quantity"
                                                            value="1" min="1" step="1"
                                                            class="w-auto">
                                                 </div>
                                                 <input type="hidden" name="productId" th:value="${product.id}" />
-                                                <div class="product-extra-link2">
-                                                    <button   id="addToCartButton" type="submit" class="button button-add-to-cart">Add to cart</button>
-                                                </div>
+<!--                                                <div class="product-extra-link2">-->
+<!--                                                    <button   id="addToCartButton" type="submit" class="button button-add-to-cart">Add to cart</button>-->
+<!--                                                </div>-->
                                             </form>
                                             <div class="product-extra-link2">
                                                 <form id="addToReview" th:action="@{/addReview}" method="post">
