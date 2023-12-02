@@ -92,6 +92,7 @@ public class ProductController {
         ProductDto productDto= productservice.findById(id);
         List<Image>images= imageService.findProductImages(id);
         model.addAttribute("title","update ");
+
         model.addAttribute("categories",categories);
         model.addAttribute("images",images);
 

@@ -33,11 +33,6 @@ public class ProductserviceImple implements Productservice {
     }
 
 
-//    @Override
-//    public List<ProductDto> findAll() {
-//        return data(productRepository.findAll());
-//    }
-
     @Override
     public List<ProductDto> findAll() {
         List<Product> products = productRepository.findAll();
