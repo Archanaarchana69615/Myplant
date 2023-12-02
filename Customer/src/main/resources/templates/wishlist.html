@@ -44,10 +44,11 @@
                 </td>
                 <td class="product-des product-name">
                   <h5 class="product-name"><a th:href="@{/product-full/{id}(id = ${wishlist.product.id})}" th:text="${wishlist.product.name}"></a></h5>
-                  <form id="addToCart" th:action="@{/add-to-cart}" method="post">
-
-                    <input type="hidden" name="id" id="id" th:value="${wishlist.product.id}" />
-                    <button class="btn btn-sm"  id="addToCartButton" type="submit"><i class="fi-rs-shopping-bag mr-5"></i>Add to cart</button>
+                  <form class="addToCartForm" th:action="@{/add-to-cart}" method="post">
+                    <input type="hidden" name="productId" th:value="${wishlist.product.id}" />
+                    <button class="btn btn-sm addToCartButton" type="submit">
+                      <i class="fi-rs-shopping-bag mr-5"></i>Add to cart
+                    </button>
                   </form>
                 </td>
 
