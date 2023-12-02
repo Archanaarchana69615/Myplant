@@ -38,7 +38,7 @@ public class WishlistController {
             model.addAttribute("check", "you dont have any wishlist");
         }
             model.addAttribute("wishlists", wishlists);
-            return "/wishlist";
+            return "wishlist";
     }
     @PostMapping("/create-wishlist")
     public String createWishlist(@RequestParam("wishlistName")String wishlistName, Principal principal, RedirectAttributes attributes)
