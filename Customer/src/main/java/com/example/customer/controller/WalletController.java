@@ -13,6 +13,7 @@ import com.razorpay.RazorpayException;
 import com.razorpay.Utils;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -53,9 +54,7 @@ public class WalletController {
     }
     @RequestMapping(value = "/add-wallet",method = RequestMethod.POST)
     @ResponseBody
-    public String addWallet(@RequestBody Map<String,Object>data,Principal principal, HttpSession session,Model model)throws RazorpayException
-
-    {
+    public String addWallet(@RequestBody Map<String,Object>data,Principal principal, HttpSession session,Model model) throws RazorpayException, JSONException {
       if(principal==null)
       {
           return "redirect:/login";
@@ -77,7 +76,7 @@ public class WalletController {
     }
  @RequestMapping(value = "/verify-wallet",method = RequestMethod.POST)
     @ResponseBody
-    public  String verifyWallet(@RequestBody Map<String,Object>data,Principal principal,HttpSession session) throws RazorpayException {
+    public  String verifyWallet(@RequestBody Map<String,Object>data,Principal principal,HttpSession session) throws RazorpayException, JSONException {
 
      String secrect="hugBadNfp6CQBpm8xiBl40yI";
      String order_id=data.get("razorpay_order_id").toString();
