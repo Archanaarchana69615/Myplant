@@ -11,6 +11,7 @@ import com.razorpay.Utils;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -153,7 +154,7 @@ public class OrderController {
 
 @RequestMapping(value = "/add-order",method = RequestMethod.POST)
 @ResponseBody
-public String createOrder(@RequestBody Map<String, Object> data, Principal principal, HttpSession session, Model model) throws RazorpayException {
+public String createOrder(@RequestBody Map<String, Object> data, Principal principal, HttpSession session, Model model) throws RazorpayException, JSONException {
     String paymentMethod = data.get("payment_Method").toString();
     Long address_id = Long.parseLong(data.get("addressId").toString());
     Double oldTotalPrice = (Double) session.getAttribute("totalPrice");
@@ -214,8 +215,7 @@ public String createOrder(@RequestBody Map<String, Object> data, Principal princ
             }
             @RequestMapping(value="/verify-payment",method={RequestMethod.POST,RequestMethod.GET})
             @ResponseBody
-            public String verifyPayment(@RequestBody Map<String,Object> data,HttpSession session,Principal principal)throws RazorpayException
-            {
+            public String verifyPayment(@RequestBody Map<String,Object> data,HttpSession session,Principal principal) throws RazorpayException, JSONException {
                 System.out.println(data);
                String secret="hugBadNfp6CQBpm8xiBl40yI";
                String order_id=data.get("razorpay_order_id").toString();
